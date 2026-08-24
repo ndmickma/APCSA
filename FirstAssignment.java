@@ -21,7 +21,7 @@ public class FirstAssignment extends GraphicsProgram {
     /**
 	  * Runs all the GLabels that have what I did over summer
 	  * @param 				no parameter
-	  * @return 			nothing to return
+	  * @return 			nothing is returned
 	  */
     public void run() {
     	//	The font to be used
