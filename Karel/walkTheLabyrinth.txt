@@ -1,0 +1,36 @@
+/*
+F1 = moveForward();
+F2 = turnLeft();
+F3 = turnAround();
+F4 = turnRight();
+F5 = pickBeeper();
+F6 = dropBeeper();
+*/
+
+void walkTheLabyrinth()
+{
+    // your code here
+    while(!onBeeper())
+    {
+        walk();
+    }
+    
+}
+
+void walk()
+{
+    if(frontIsClear())
+    {
+        moveForward();
+    }
+    if(rightIsClear())
+    {
+        turnRight();
+        moveForward();
+    }
+    if(leftIsClear())
+    {
+        turnLeft();
+        moveForward();
+    }
+}

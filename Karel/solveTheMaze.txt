@@ -1,0 +1,37 @@
+/*
+F1 = moveForward();
+F2 = turnLeft();
+F3 = turnAround();
+F4 = turnRight();
+F5 = pickBeeper();
+F6 = dropBeeper();
+*/
+
+void solveTheMaze()
+{
+    // your code here
+    turnRight();
+    while(!onBeeper())
+    {
+        walk();
+    }
+}
+void walk()
+{
+    if(leftIsClear())
+    {
+        turnLeft();
+    }
+    if(rightIsClear())
+    {
+        turnRight();
+    }
+    if(frontIsClear())
+    {
+        moveForward();
+    }
+    else
+    {
+        turnAround();
+    }
+}
