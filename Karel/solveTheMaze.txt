@@ -21,17 +21,20 @@ void walk()
     if(leftIsClear())
     {
         turnLeft();
+        moveForward();
     }
-    if(rightIsClear())
+    else if(frontIsClear())
+    {
+        moveForward();
+    }
+    else if(rightIsClear())
     {
         turnRight();
-    }
-    if(frontIsClear())
-    {
         moveForward();
     }
     else
     {
         turnAround();
+        moveForward();
     }
 }
