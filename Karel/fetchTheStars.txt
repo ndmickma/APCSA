@@ -1,0 +1,40 @@
+/*
+F1 = moveForward();
+F2 = turnLeft();
+F3 = turnAround();
+F4 = turnRight();
+F5 = pickBeeper();
+F6 = dropBeeper();
+*/
+
+void fetchTheStars()
+{
+    // your code here
+    while(frontIsClear())
+    {
+        fetchStar();
+    }
+    
+    
+}
+void fetchStar()
+{
+    turnLeft();
+    while(frontIsClear())
+    {
+        moveForward();
+    }
+    pickBeeper();
+    turnAround();
+    
+    comeDown();
+    
+}
+void comeDown()
+{
+    while(frontIsClear())
+    {
+        moveForward();
+    }
+    dropBeeper();
+}
