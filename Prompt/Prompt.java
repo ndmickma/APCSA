@@ -106,6 +106,22 @@ public class Prompt
 		int val = 0.0;
 		boolean found = false;
 		
+		while(!found)
+		{
+			String str = getString(ask);
+			try
+			{
+				val = Double.parseDouble(str);
+				found = true;
+			}
+			catch(NumberFormatException e)
+			{
+				found = false;
+			}
+				
+		}
+		return val;
+		
 		return 0.0;
 	}
 	
