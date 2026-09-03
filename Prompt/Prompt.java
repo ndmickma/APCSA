@@ -48,7 +48,14 @@ public class Prompt
 	 */
 	public static char getChar (String ask)
 	{
-		return ' ';
+		String str = getString(ask);
+		char input = ' ';
+		while(str.length() != 1)
+		{
+			str = getString(ask);
+		}
+		input = str.charAt(0); //this is so that the type is char
+		return input;
 	}
 	
 	/**
@@ -103,7 +110,7 @@ public class Prompt
 	 */
 	public static double getDouble (String ask)
 	{
-		int val = 0.0;
+		double val = 0.0;
 		boolean found = false;
 		
 		while(!found)
@@ -121,8 +128,6 @@ public class Prompt
 				
 		}
 		return val;
-		
-		return 0.0;
 	}
 	
 	/**
@@ -134,6 +139,11 @@ public class Prompt
 	 */
 	public static double getDouble (String ask, double min, double max)
 	{
-		return 0.0;
+		double val = 0.0;
+		do
+		{
+			val =  getDouble(ask + " (" + min + "," + max + ")");
+		}while(val < min || val > max);
+		return val;
 	}
 }
