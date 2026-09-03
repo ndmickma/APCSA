@@ -9,6 +9,9 @@ public class PromptTester {
 		String str = Prompt.getString("Provide me a string");
 		System.out.println("Here it is -> " + str);
 		
+		char cha = Prompt.getChar("Provide me a char");
+		System.out.println("Here it is -> " + cha);
+		
 		int a = Prompt.getInt("Give me an integer");
 		System.out.println("Here it is -> " + a);
 		
