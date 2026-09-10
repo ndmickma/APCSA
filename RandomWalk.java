@@ -12,6 +12,11 @@ public class RandomWalk
 {
 	public static void main(String [] args)
 	{
+		System.out.println("Welcome to RandomWalk!");
+
+		//array of doubles to hold 20 avg distances
+		double [] avgDist = new
+		loopWalkLength(); //call method to calculate random walks
 		
 	}
 	
