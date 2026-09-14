@@ -10,31 +10,32 @@ F6 = dropBeeper();
 void fetchTheStars()
 {
     // your code here
-    while(frontIsClear())
+    repeat(9)
     {
         fetchStar();
+        moveForward();
     }
+    fetchStar();
+    
     
     
 }
-void fetchStar()
-{
-    turnLeft();
-    while(frontIsClear())
-    {
-        moveForward();
-    }
-    pickBeeper();
-    turnAround();
-    
-    comeDown();
-    
+void fetchStar() {
+    turnLeft();             // Face North
+    fetchAndReturn();       // Call the recursive method
+    turnLeft();             // Face East again
+    dropBeeper();           // Drop the star on the lake
 }
-void comeDown()
-{
-    while(frontIsClear())
-    {
-        moveForward();
+
+void fetchAndReturn() {
+    if (frontIsClear()) {
+        moveForward();      // Step up
+        fetchAndReturn();   // Recursively call itself until it hits the ceiling
+        moveForward();      // Step down (executed on the way back down)
     }
-    dropBeeper();
+    else {
+        // Base case: Karel is at the top wall
+        pickBeeper();
+        turnAround();       // Face South so the unwinding moves Karel down
+    }
 }
