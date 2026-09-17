@@ -25,7 +25,7 @@
  * @since DATE
  */
 
-public class PigGame
+public class PigStatistics
 {
     /*
      * ------------------------------------------------------------
@@ -127,7 +127,7 @@ public class PigGame
      * There are no parameters because the user does not need to
      * give us any information when creating the PigGame object.
      */
-    public PigGame()
+    public PigStatistics()
     {
         /*
          * Create a normal six-sided die.
@@ -167,7 +167,7 @@ public class PigGame
          *
          * "game" is the variable that refers to this object.
          */
-        PigGame game = new PigGame();
+        PigStatistics game = new PigStatistics();
 
 
         /*
@@ -263,6 +263,7 @@ public class PigGame
              *
              * A loop would be more user-friendly.
              */
+             choice = Prompt.getChar("Enter p or s");
         }
     }
 
@@ -325,6 +326,10 @@ public class PigGame
              *     ...
              * }
              */
+            if(humanScore >= WINNING_SCORE)
+            {
+                break;
+            }
 
 
             /*
@@ -359,6 +364,10 @@ public class PigGame
          *
          * when the user wins.
          */
+        if(humanScore >= WINNING_SCORE)
+            System.out.println("Congratulations!!! YOU WON!!!!");
+        else
+            System.out.println("Uh oh! The computer won!");
 
 
         /*
@@ -443,6 +452,7 @@ public class PigGame
                  *
                  * The roll() method returns an int from 1 to 6.
                  */
+                int roll = die.roll();
 
 
                 /*
@@ -456,6 +466,7 @@ public class PigGame
                  *
                  * die.printDice();
                  */
+                die.printDice();
 
 
                 /*
@@ -474,6 +485,17 @@ public class PigGame
                  *
                  * - Add roll to turnScore.
                  */
+                if(roll == 1)
+                {
+                    System.out.println("You LOSE your turn.");
+                    turnOver = true;
+                    turnScore = 0;
+                    System.out.println("Your total score: " + humanScore);
+                }
+                else
+                {
+                    turnScore += roll;
+                }
             }
 
 
@@ -497,6 +519,10 @@ public class PigGame
                  *
                  * HOLD = permanently save the temporary points.
                  */
+                System.out.println("You HOLD");
+                humanScore += turnScore;
+                System.out.println("Your total score: " + humanScore);
+                turnOver = true;
             }
 
 
@@ -595,6 +621,13 @@ public class PigGame
              * The computer should NOT voluntarily hold at 18 or 19.
              * It must keep rolling until it reaches at least 20.
              */
+            if(turnScore >= COMPUTER_HOLD_SCORE || computerScore + turnScore >= WINNING_SCORE)
+            {
+                computerScore += turnScore;
+                System.out.println("Computer will HOLD");
+                System.out.println("Computer's total score: " + computerScore);
+                turnOver = true;
+            }
 
 
             /*
@@ -608,6 +641,9 @@ public class PigGame
              *
              * Then print the die.
              */
+            System.out.println("Computer will ROLL");
+            int roll = die.roll();
+            die.printDice();
 
 
             /*
@@ -628,6 +664,15 @@ public class PigGame
              *
              * The computer continues rolling.
              */
+            if(roll == 1)
+            {
+                turnOver = true;
+                turnScore = 0;
+                System.out.println("Computer loses turn.");
+                System.out.println("Computer's total score: " + computerScore);
+            }
+            else
+                turnScore += roll;
         }
     }
 
@@ -740,6 +785,7 @@ public class PigGame
              *
              * int score = simulateTurn();
              */
+             int score = simulateTurn();
 
 
             /*
@@ -757,6 +803,7 @@ public class PigGame
              *
              * "We just had one more turn that ended with 22."
              */
+             results[score]++;
         }
 
 
@@ -814,6 +861,17 @@ public class PigGame
          * You do NOT need a boolean if you structure your
          * while condition carefully.
          */
+         while(die.roll() != 1 && turnScore < 20)
+         {
+			int roll = die.roll();
+			if(roll == 1)
+				return 0; //0 points for turn
+			else
+			{
+				turnScore += roll;
+			}
+		 }
+
 
 
         /*
@@ -867,7 +925,7 @@ public class PigGame
          *
          * Return 24.
          */
-        return 0;   // TEMPORARY - replace with your actual logic
+		return turnScore;
     }
 
 
@@ -878,7 +936,7 @@ public class PigGame
      * @param results an array containing the number of times each
      *                possible turn score occurred
      *
-     * @param numTurns the total number of simulated turns
+     * @param numTurns the total number of simulated turns from user
      *
      * The probability is calculated using:
      *
@@ -943,6 +1001,14 @@ public class PigGame
          *
          * and then a loop beginning at 20.
          */
+        System.out.printf("%2d\t %6.5f \n", 0, (results[0]/(double)numTurns));
+
+		for (int i = 20; i < results.length; i++)
+		{
+			double prob = results[i]/(double)numTurns;
+			System.out.printf("%2d\t %6.5f \n", i, prob);
+			
+		}
 
 
         /*
@@ -975,6 +1041,7 @@ public class PigGame
          *
          * will give you a decimal probability.
          */
+         
 
 
         /*
